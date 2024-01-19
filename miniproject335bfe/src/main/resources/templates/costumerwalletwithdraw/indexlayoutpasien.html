@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{pasien/layoutpasien2.html}">
+
+<head>
+    <title>Judul</title>
+    <script src="/js/costumerwalletwithdraw/costumerwalletwithdraw.js"></script>
+</head>
+
+<body>
+    <div layout:fragment="c2">
+    	<script>
+    		$('#withdraw-tab').addClass("active");
+    	</script>
+		<div class="row">
+			<div class="col-md-5 m-2">
+				<div class="card">
+					<div style="height: 100px;">
+						<div id="saldo"></div>
+					</div>
+                    <div class="m-2">
+                    	<div id="defaultNominal"></div>
+                    </div>
+            	</div>
+			</div>
+			<div class="col-md-5 m-2">
+            	<div class="card">
+               		<div style="height: 200px;">
+                    	<div id="pilihan"></div>
+                    </div>
+                    <div class="footer" style="text-align: right;">
+                    	<button class="btn btn-secondary" id="pilihanCancel" disabled>Cancel</button>
+                    	<button class="btn btn-primary" id="pilihanSubmit" disabled>OK</button>
+                   	</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</body>
+
+</html>

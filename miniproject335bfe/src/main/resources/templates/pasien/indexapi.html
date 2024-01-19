@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Pasien</title>
+	<script src="/js/pasien.js"></script>
+	<script src="/js/landingPage.js"></script>
+</head>
+
+<body>
+	<div layout:fragment="c2">
+		<h1 style="padding-left: 45%;">Pasien</h1>
+		<div class="row">
+			<div class="col-md-6" style="padding-left: 10%;">
+				<div class="row">
+					<div class="col-md-6">
+						<input class="form-control" oninput="searchPasienName(this.value)" placeholder="Search by name">
+					</div>
+					<div class="col-md-10 d-flex justify-content-end">
+						<button onclick="openModal()" class="btn btn-primary mb-2" data-toggle="modal"
+							data-target="#exampleModal">Tambah Data</button>
+					</div>
+				</div>
+				<table class="table text-center" border="2" style="width: max-content;">
+					<thead>
+						<th>Fullname</th>
+						<th>Relasi</th>
+						<th>Umur</th>
+						<th>Action</th>
+					</thead>
+					<tbody id="isidata">
+
+					</tbody>
+				</table>
+				<div id="paging">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

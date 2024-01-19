@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Specialis</title>
+	<script src="/js/Spesialis.js"></script>
+	<script src="/js/landingPage.js"></script>
+	<style>
+		th {
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>Spesialisasi Dokter Page</h1>
+		<p></p>
+		<div>
+			<input type="text" class=" bg-light border-1 medium" placeholder="Search By Nama"
+				oninput="searchSpesialis(this.value,0,5)">
+		</div>
+		<div class="mt-2">
+			<p align="right">
+				<button id="btnNew" class="btn btn-right btn-primary text-white" onclick="createNew()">
+					Tambah
+				</button>
+			</p>
+		</div>
+		<p></p>
+		<div>
+			<table class="table">
+				<thead class="bg-gradient-primary">
+					<tr>
+						<th scope="col" class="pl-5">Nama</th>
+						<th colspan="2">
+							<center> # </center>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="isidata">
+				</tbody>
+			</table>
+		</div>
+		<div id="pagination">
+		</div>
+	</div>
+
+</body>
+
+</html>

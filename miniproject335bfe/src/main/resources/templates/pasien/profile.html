@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{pasien/layoutpasien2.html}">
+
+<head>
+    <title>Judul</title>
+    <script src="/js/profilpasien/pasienprofile.js"></script>
+    <script src="/js/profilpasien/pasienubahdata.js"></script>
+    <script src="/js/profilpasien/pasienubahpass.js"></script>
+    <script src="/js/profilpasien/pasienubahmail.js"></script>
+</head>
+
+<body>
+    <div layout:fragment="c2">
+    	<script>
+    		$('#profile-tab').addClass("active");
+    	</script>
+		<div>
+		<div class="panel">
+		<h5 class="d-inline">Data Pribadi</h5>
+		<i class="fa fa-pen-square fa-pull-right" onclick="f_ubahData()"></i>
+		</div>
+			<form>
+				<div class="form-group">
+					<label>Nama Lengkap</label>
+				    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 bg-white" disabled id="nama" value="Nama">
+				</div>
+				<div class="form-group">
+					<label>Tanggal Lahir</label>
+				    <input type="date" class="form-control border-top-0 border-right-0 border-left-0 bg-white" disabled id="tgl" value="Tanggal">
+				</div>
+				<div class="form-group">
+					<label>Nomor Handphone</label>
+				    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 bg-white" disabled id="hp" value="+123">
+				</div>
+			</form>
+		</div>
+		<div>
+		<h5>Data Akun</h5>
+			<form>
+				<div class="form-group">
+					<div>
+					<label>Email</label>
+					<i class="fa fa-pen-square fa-pull-right" onclick="f_ubahMail()"></i>
+					</div>
+				    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 bg-white" disabled id="email" value="Nama">
+				</div>
+				<div class="form-group">
+					<div>
+					<label>Password</label>
+					<i class="fa fa-pen-square fa-pull-right" onclick="f_ubahPass()"></i>
+					</div>
+				    <input type="password" class="form-control border-top-0 border-right-0 border-left-0 bg-white" disabled id="pass" value="Tanggal">
+				</div>
+			</form>
+		</div>
+    </div>
+</body>
+
+</html>

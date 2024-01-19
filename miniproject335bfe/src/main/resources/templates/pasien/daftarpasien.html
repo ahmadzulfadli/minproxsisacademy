@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{pasien/layoutpasien}">
+
+<head>
+	<title>Pasien</title>
+	<script src="/js/pasien.js"></script>
+	<script src="/js/landingPage.js"></script>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+
+		<!-- Content Row -->
+		<div class="row">
+			<!-- Area Chart -->
+			<div class="col-xl-12 col-lg-7">
+				<div class="card shadow mb-4">
+					<!-- Card Header - Dropdown -->
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Beranda / <a href="/pasien/profile">Profile</a> /
+							<a href="/pasien/daftarpasien">Pasien</a>
+						</h6>
+					</div>
+					<!-- Card Body -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<div class="card-body">
+									<h5 style="text-align: center;" class="card-title">Bronze Member</h5>
+									<p style="text-align: center;" class="card-text">Since 2024</p>
+								</div>
+								<div class="card-body">
+									<h5 ><a href="/pasien/daftarpasien">Pasien</a></h5>
+									<h5>Pembelian Obat</h5>
+									<h5>Rencana Kedatangan</h5>
+									<h5>Riwayat Chat Dokter</h5>
+								</div>
+							</div>
+							<div class="col-8">
+								<h4 style="padding-left: 5%; color: #4E73DF;">Daftar Pasien</h4>
+								<div class="card">
+									<section layout:fragment="c1">
+										<div class="row">
+											<div class="col-md-12" style="padding-left: 5%;">
+												<div class="row" style="padding-top: 5%;">
+													<div class="col-md-12">
+														<!-- Topbar Search -->
+														<form class="form-inline col-md-12">
+															<div class="row col-md-12">
+																<div class="col-md-6">
+																	<div class="input-group">
+																		<input type="text"
+																			id="test"
+																			placeholder="Search by name"
+																			class="form-control bg-light border-0 small"
+																			aria-label="Search"
+																			aria-describedby="basic-addon2">
+																		<div class="input-group-append">
+																			<button class="btn btn-primary"
+																				type="button"
+																				onclick="searchPasienName()">
+																				<i class="fas fa-search fa-sm"></i>
+																			</button>
+																		</div>
+																	</div>
+
+																</div>
+																<div class="row col-md-6 d-flex justify-content-end" id="sorting">
+																	
+																</div>
+															</div>
+														</form>
+													</div>
+
+													<div class="row col-md-12"
+														style="padding-left: 5%; margin-top: 5%;">
+														<div class="form-inline col-md-12">
+															<div class="col-md-3" style="padding-left:0%;" id="btnMultiDelete">
+																
+															</div>
+
+															<div class="col-md-9 d-flex justify-content-end"
+																style="padding-right: 6%;">
+																<label> <a>A-z</a> <a> | </a></label>
+																<label for="rowPage" class="ml-4 m-2">Row</label>
+																<div class="row col-md-5">
+																	<select class="form-control" id="rowPage"
+																		onchange="f_data_pageable(this.value)">
+																		<option disabled>Row Page</option>
+																		<option value="3">3</option>
+																		<option value="5" selected>5</option>
+																		<option value="10">10</option>
+																	</select>
+																</div>
+
+																<button onclick="openModal()"
+																	class="btn btn-primary mb-2" data-toggle="modal"
+																	data-target="#exampleModal">TambahData</button>
+															</div>
+														</div>
+
+													</div>
+
+												</div>
+												<table class="table table-hover">
+													<tbody id="isidata">
+														
+													</tbody>
+												</table>
+												
+												<div id="paging" class="col-md-12 d-flex justify-content-end"
+													style="padding-right: 10%;">
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+
+</html>

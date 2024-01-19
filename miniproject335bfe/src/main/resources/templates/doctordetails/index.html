@@ -1,0 +1,120 @@
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/layout}">
+
+<head>
+    <title>Profile Dokter</title>
+    <script src="/js/doctordetails/doctordetails.js"></script>
+    <style>
+        #riwayat {
+            margin-bottom: 1px;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        #chat,
+        #janji {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            padding: 3px;
+            background: lightblue;
+            border: 3px;
+            color: #000;
+            text-align: center;
+            font: 32px Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="col-xl-12" style="width: 100%;">
+            <div class="col-xl-12 col-lg-12 py-3" style="background-color: white; width: 100%;" >
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb" class="rounded-3 p-3 mb-4">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="/loginpasien">Beranda</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Cari Dokter</li>
+                                <li class="breadcrumb-item active" aria-current="page" id="pageName"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <div class="card-body text-center">
+                            <div id="imgBiodata"></div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div id="nama"></div>
+                        <div id="spesialisasi"></div>
+                    </div>
+                    <div class="col-3">
+                        <div id="onlineService"></div>
+                        <div id="priceConsultasi" class="mt-2"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-3 mb-lg-0">
+                            <div class="card-body p-4">
+                                <div class="tindakan">
+                                    <div>
+                                        <p class="mb-1 ml-3 mt-2 text-primary" style="font-size: large;">Tindakan Medis
+                                        </p>
+                                    </div>
+                                    <div class="card">
+                                        <ul style="font-size:medium;" id="tindakan">
+                                            <li>Konsultasi Kesehatan anak</li>
+                                            <li>Skrining Tumbuh Kembang Anak</li>
+                                            <li>tes</li>
+                                            <li>tes</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="riwayat">
+                                    <div>
+                                        <p class="mb-1 ml-3 mt-2 text-primary" style="font-size: large;">Riwayat Praktek
+                                        </p>
+                                    </div>
+                                    <div class="card pt-2" id="riwayatPraktek"></div>
+                                </div>
+
+                                <div>
+                                    <p class="mb-1 ml-3 mt-2 text-primary" style="font-size: large;">Pendidikan</p>
+                                </div>
+                                <div class="card pt-2" id="education">
+                                    <p class="ml-4" style="font-size: medium;" id="riwayat">Universitas Padjajaran</p>
+                                    <div class="row ml-1">
+                                        <div class="col-sm-8 d-flex justify-content-left">
+                                            <p class="ml-4" style="font-size: small;">Kedokteran Umum</p>
+                                        </div>
+                                        <div class="col-sm-4 d-flex justify-content-end pr-5">
+                                            <p style="font-size: small;" class="left">2011</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                Lokasi Praktek
+                            </div>
+                            <div class="card-body" id="lokasiPraktek">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</body>
+
+</html>

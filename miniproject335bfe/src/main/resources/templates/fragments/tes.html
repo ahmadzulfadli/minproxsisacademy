@@ -1,0 +1,118 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title>Jenjang Pendidikan</title>
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<section class="content" layout:fragment="content">
+
+		</section>
+	</div>
+	<!-- Button trigger modal 
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			Launch demo modal
+		</button>
+		-->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="fullName">Nama Lengkap</label>
+							<input type="text" class="form-control" id="fullname" placeholder="Nama Lengkap">
+						</div>
+						<div class="form-group">
+							<label for="dob">Tanggal Lahir</label>
+							<input type="date" class="form-control" id="tgllahir">
+						</div>
+						<div class="form-row">
+							<div class="col-md-4 pb-0">
+								<div class="form-group">
+									<label>Jenis Kelamin</label>
+								</div>
+							</div>
+							<div class="col-md-8 pb-0 text-center">
+								<div class="form-check form-check-inline ml-3">
+									<input class="form-check-input" type="radio" name="gender" id="pria" value="L">
+									<label class="form-check-label" for="pria">Pria</label>
+								</div>
+								<div class="form-check form-check-inline ml-2">
+									<input class="form-check-input" type="radio" name="gender" id="wanita" value="P">
+									<label class="form-check-label" for="wanita">Wanita</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="bloodGroupId">Golongan Darah / Rhesus</label>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<select id="bloodGroupId" class="form-control">
+									<option>-- Pilih --</option>
+									<option></option>
+								</select>
+							</div>
+							<div class="form-group col-md-8 text-center">
+								<div class="form-check form-check-inline mr-3">
+									<input class="form-check-input" type="radio" name="rhesusType" id="rh+"
+										value="Rh+">
+									<label class="form-check-label" for="rh+">Rh+</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="rhesusType" id="rh-"
+										value="Rh-">
+									<label class="form-check-label" for="rh-">Rh-</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="height">Tinggi Badan</label>
+								<input type="text" class="form-control" id="height" placeholder="Tinggi Badan">
+							</div>
+							<div class="col-md-2"></div>
+							<div class="form-group col-md-4">
+								<label for="weight">Berat Badan</label>
+								<input type="text" class="form-control" id="weight" placeholder="Berat Badan">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<label for="customerRelasiId">Relasi</label>
+								<select id="customerRelasiId" class="form-control">
+									<option>-- Pilih --</option>
+									<option></option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

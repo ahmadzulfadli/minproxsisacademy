@@ -1,0 +1,186 @@
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Profile Dokter</title>
+	<script src="/js/ProfileDokter.js"></script>
+	<script src="/js/landingPage.js"></script>
+	<style>
+		#riwayat{
+			margin-bottom: 1px;
+		}
+		.left{
+			text-align: left;
+		}
+		#chat, #janji{
+			border-radius: 50%;
+	        width: 25px;
+	        height: 25px;
+	        padding: 3px;
+	        background: lightblue;
+	        border: 3px;
+	        color: #000;
+	        text-align: center;
+	        font: 32px Arial, sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+
+		<section style="background-color: #eee;">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col">
+						<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+							<ol class="breadcrumb mb-0">
+								<li class="breadcrumb-item"><a href="/login">Beranda</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card mb-4">
+							<div class="card-body text-center">
+								<div id="imgBiodata"><img src="/svg/person-circle.svg"
+									alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"></div>
+								
+								<h4 class="my-3" id="nama">John Smith</h4>
+								<p class="text-muted" id="judulSpecial"></p>
+								<div class="row container mb-3 d-flex justify-content-center mb-4" style="margin-left: -2px;">
+									<img src="/svg/star-fill.svg">
+									<img src="/svg/star-fill.svg">
+									<img src="/svg/star-fill.svg">
+									<img src="/svg/star-fill.svg">
+									<img src="/svg/star-fill.svg">
+								</div>
+								<div class="d-flex justify-content-center mb-2 ">
+									<button type="button" class="btn btn-primary" onclick="modalImg()">Change Profile Picture</button>
+								</div>
+								
+								<hr class="divider my-3">
+									<div class="row">
+										<div class="col-sm-6">
+											<p style="text-align: left; font-size: large;" class="ml-3 text-primary"><b>Janji</b></p>
+										</div>
+										<div class="col-sm-6 d-flex justify-content-end" id="jumlahJanji">
+											<!--<p style="font-size: medium;" class="mr-3 text-primary" id="janji"><b>1</b></p>-->
+										</div>
+									</div>
+									
+									
+								</hr>
+								<hr class="divider my-3">
+									
+									<div class="row">
+										<div class="col-sm-9">
+											<p style="text-align: left; font-size: large;" class="ml-3 text-primary"><b>Obrolan/Konsultasi</b></p>
+										</div>
+										<div class="col-sm-3 d-flex justify-content-end" id="jumlahChat">
+											<!--<p style="font-size: medium;" class="mr-3 text-primary" id="chat"><b>1</b></p>-->
+										</div>
+									</div>
+								</hr>
+								<hr class="divider"></hr>
+								<br>
+							</div>
+						</div>
+						<div class="card mb-3 mb-lg-0">
+							<div class="card-body p-0">
+								<div class="bg-primary d-flex justify-content-center container">
+									<p class="mb-0 text-white p-2" style="font-size: large;">Tentang Saya</p>
+								</div>
+								<div>
+									<p class="mb-1 ml-3 mt-2 text-primary" style="font-size: large;">Tindakan Medis</p>
+									<ul style="font-size:small;" id="tindakan">
+
+									</ul>
+								</div>
+								
+								<div>
+									<p class="mb-1 ml-3 mt-2 text-primary" style="font-size: large;">Riwayat Praktek</p>
+								</div>
+								
+								<div id="office">
+									<p class="ml-4" style="font-size: medium;" id="riwayat">RS Mitra, Depok</p>
+									<div class="row ml-1">
+										<div class="col-sm-6 d-flex justify-content-left">
+											<p class="ml-4" style="font-size: small;">Dokter anak</p>
+										</div>
+										<div class="col-sm-6 d-flex justify-content-end pr-5">
+											<p style="font-size: small;" class="left">2019-sekarang</p>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div>
+									<p class="mb-1 ml-3 mt-2 text-primary" style="font-size: x-large;">Pendidikan</p>
+								</div>
+								
+								<div id="education">
+									<p class="ml-4" style="font-size: medium;" id="riwayat">Universitas Padjajaran</p>
+									<div class="row ml-1">
+										<div class="col-sm-8 d-flex justify-content-left">
+											<p class="ml-4" style="font-size: small;">Kedokteran Umum</p>
+										</div>
+										<div class="col-sm-4 d-flex justify-content-end pr-5" >
+											<p style="font-size: small;" class="left">2011</p>
+										</div>
+									</div>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="card mb-5">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex justify-content-center">
+										<button type="button" class="btn btn-outline-primary" onclick="special()">Spesialisasi</button>
+									</div>
+									<div class="col-sm-2 d-flex justify-content-center">
+										<button type="button" class="btn btn-outline-primary" onclick="getTreatment()">Tindakan</button>
+									</div>
+									<div class="col-sm-2 d-flex justify-content-center">
+										<button type="button" class="btn btn-outline-primary">Aktifitas</button>
+									</div>
+									<div class="col-sm-2 d-flex justify-content-center">
+										<button type="button" class="btn btn-outline-primary">Konsultasi</button>
+									</div>
+									<div class="col-sm-2 d-flex justify-content-center">
+										<button type="button" class="btn btn-outline-primary">Pengaturan</button>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="container" id="special">
+											
+									</div>
+									
+								</div>
+								
+								
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	</div>
+
+</body>
+
+</html>

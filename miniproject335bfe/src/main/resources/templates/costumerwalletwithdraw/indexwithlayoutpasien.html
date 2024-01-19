@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/layout}">
+
+<head>
+    <title>Judul</title>
+    <script src="/js/costumerwalletwithdraw/costumerwalletwithdraw.js"></script>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Beranda/profile</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bronze Member</h5>
+                                    <p class="card-text">Since 2024</p>
+                                </div>
+                                <div class="card-body">
+                                    <h5>Pasien</h5>
+                                    <h5>Pembelian Obat</h5>
+                                    <h5>Rencana Kedatangan</h5>
+                                    <h5>Riwayat Chat Dokter</h5>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab"
+                                            role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="address-tab" data-toggle="tab"
+                                            role="tab" aria-controls="adress" aria-selected="false">Alamat</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="payment-tab" data-toggle="tab"
+                                            role="tab" aria-controls="payment" aria-selected="false">Pembayaran</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link active" id="whitdraw-tab" data-toggle="tab"
+                                            role="tab" aria-controls="eithdraw" aria-selected="false">Tarik Saldo</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-5 m-2">
+                                            <div class="card">
+                                                <div style="height: 100px;">
+                                                    <div id="saldo"></div>
+                                                </div>
+                                                <div class="m-2">
+                                                    <div id="defaultNominal"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 m-2">
+                                            <div class="card">
+                                                <div style="height: 200px;">
+                                                    <div id="pilihan"></div>
+                                                </div>
+                                                <div class="footer" style="text-align: right;">
+                                                    <button class="btn btn-secondary" id="pilihanCancel" disabled>Cancel</button>
+                                                    <button class="btn btn-primary" id="pilihanSubmit" disabled>OK</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

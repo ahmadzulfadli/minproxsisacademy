@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/layout}">
+
+<head>
+    <title>Pasien</title>
+    <!-- <script src="/js/pasien.js"></script> -->
+    <script src="/js/landingPage.js"></script>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Beranda / Profile</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bronze Member</h5>
+                                    <p class="card-text">Since 2024</p>
+                                </div>
+                                <div class="card-body">
+                                    <h5><a href="/pasien/daftarpasien">Pasien</a></h5>
+                                    <h5>Pembelian Obat</h5>
+                                    <h5>Rencana Kedatangan</h5>
+                                    <h5>Riwayat Chat Dokter</h5>
+                                </div>
+                            </div>
+                            <section layout:fragment="c1">
+								
+							</section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

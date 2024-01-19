@@ -1,0 +1,48 @@
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Blood Group</title>
+	<script src="/js/bloodGroup.js"></script>
+	<style>
+		th {
+			color: white;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+
+		<div class="container">
+			<h1 class="mb-5"><center>Golongan Darah</center></h1>
+			<div class="row">
+				<div class="col-md-3" >
+					<input class="form-control" type="search" placeholder="Search" oninput="searchBlood(this.value)">
+				</div>
+				<div class="col-md d-flex justify-content-end">
+					<button onclick="modalNew()" class="btn btn-success mb-3 ">Create New</button>
+				</div>
+			</div>
+
+
+
+			<table class="table table-striped" border="2">
+				<thead class="table-primary">
+					<tr class="bg-primary">
+						<th>CODE</th>
+						<th>DESKRIPSI</th>
+						<th colspan="2">ACTION</th>
+					</tr>
+				</thead>
+
+				<tbody id="isidata"></tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+</html>

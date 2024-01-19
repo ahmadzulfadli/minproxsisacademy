@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{pasien/layoutpasien}">
+
+<head>
+	<title>Pasien</title>
+	<!-- <script src="/js/pasien.js"></script> -->
+	<script src="/js/landingPage.js"></script>
+
+</head>
+
+<body>
+	<div layout:fragment="c1" class="col-8">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" href="/pasien/profile"
+						>Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="address-tab" href="/pasien/alamat"
+						>Alamat</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="payment-tab" data-toggle="tab" role="tab"
+						>Pembayaran</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" id="withdraw-tab" href="/pasien/paymentmethod"
+						>Tarik Saldo</a>
+				</li>
+				
+			</ul>
+			<div layout:fragment="c2">
+				</div>
+	</div>
+</body>
+
+</html>
