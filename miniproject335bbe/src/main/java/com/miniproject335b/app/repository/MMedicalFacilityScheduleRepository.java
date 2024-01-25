@@ -25,7 +25,7 @@ public interface MMedicalFacilityScheduleRepository extends JpaRepository<MMedic
 			"ON mmfs.medical_facility_id = mmf.id\n" + //
 			"JOIN t_doctor_office tdo\n" + //
 			"ON tdo.medical_facility_id = mmf.id\n" + //
-			"WHERE mmf.medical_facility_category_id != 1 AND tdo.doctor_id = ?1 AND tdo.end_date IS NULL;",nativeQuery = true)
+			"WHERE mmf.medical_facility_category_id != 1 AND tdo.doctor_id = ?1 AND tdo.end_date IS NULL",nativeQuery = true)
 	List<MMedicalFacilitySchedule> listScheduleOnline(Long doctorId);
     // Fadli query end
 }

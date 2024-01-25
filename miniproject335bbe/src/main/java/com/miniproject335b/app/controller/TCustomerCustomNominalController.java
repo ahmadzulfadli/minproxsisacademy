@@ -60,7 +60,7 @@ public class TCustomerCustomNominalController {
                 }
             }
 
-            List<MWalletDefaultNominal> listMWalletDefaultNominal = this.mWalletDefaultNominalRepository.findByIsDelete(false);
+            List<MWalletDefaultNominal> listMWalletDefaultNominal = this.mWalletDefaultNominalRepository.findByIsDelete();
             for (MWalletDefaultNominal mWalletDefaultNominal : listMWalletDefaultNominal) {
                 if (mWalletDefaultNominal.getNominal().equals(tCustomerCustomNominal.getNominal())) {
                     return new ResponseEntity<>(response("success", "Nominal Is Exists", tCustomerCustomNominal), HttpStatus.OK);
@@ -83,9 +83,10 @@ public class TCustomerCustomNominalController {
 
     // READ-----------------------------------------------------------------------------------------
     @GetMapping("show/{id}")
-    public ResponseEntity<Map<String, Object>> getDataByCustomerId(@PathVariable("id") Long id){
+    public ResponseEntity<Map<String, Object>> getDataByCustomerId(@PathVariable("id") Long id, @RequestParam Double balance){
         try {
-            List<TCustomerCustomNominal> tCustomerCustomNominal = this.tCustomerCustomNominalRepository.findByCostumerId(id);
+            System.out.println("balance : " + balance);
+            List<TCustomerCustomNominal> tCustomerCustomNominal = this.tCustomerCustomNominalRepository.findByCostumerId(id, balance);
             if (tCustomerCustomNominal.isEmpty()) {
                 return new ResponseEntity<>(response("success", "No Data", tCustomerCustomNominal), HttpStatus.OK);
             }else{

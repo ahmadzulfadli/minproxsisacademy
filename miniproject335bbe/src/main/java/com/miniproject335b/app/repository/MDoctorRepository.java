@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.miniproject335b.app.model.MDoctor;
-import com.miniproject335b.app.model.Mspecialization;
 
 public interface MDoctorRepository extends JpaRepository<MDoctor, Long>{
 
@@ -38,7 +37,7 @@ public interface MDoctorRepository extends JpaRepository<MDoctor, Long>{
 			"ON tdos.medical_facility_schedule_id = mmfs.id\n" + //
 			"JOIN m_medical_facility mmf\n" + //
 			"ON mmfs.medical_facility_id = mmf.id\n" + //
-			"WHERE tdos.doctor_id = ?1 AND mmf.id = ?2",nativeQuery = true)
+			"WHERE tdos.doctor_id = ?1 AND mmf.id = ?2 ORDER BY mmfs.day DESC",nativeQuery = true)
 	List<Object> listSchedule(Long doctorId, Long medicalFacilityId);
 
 	// Fadli query end

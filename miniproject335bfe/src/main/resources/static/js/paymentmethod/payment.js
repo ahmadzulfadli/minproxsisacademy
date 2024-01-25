@@ -1,3 +1,4 @@
+
 var currentPage = 0
 var currentPageSearch = 0
 var size = 3;
@@ -6,33 +7,11 @@ var order = "asc";
 var isSearch = false;
 
 $(function () {
+    $('#search').val("")
     f_data_pageable()
 })
 
-function f_all_data() {
-    $.ajax({
-        url: 'http://localhost:8888/api/paymentmethod/showall',
-        type: 'get',
-        contentType: 'application/json',
-        success: function (data) {
-            var str = ""
-            for (var i = 0; i < data.length; i++) {
-                str += '<tr>'
-                str += '<td>' + data[i].name + '</td>'
-                str += '<td style="text-align: center;">'
-                str += '<button class="btn btn-warning mr-2" value=' + data[i].id + ' onclick="f_edit(this.value)">Ubah</button>'
-                str += '<button class="btn btn-danger" value=' + data[i].id + ' onclick="f_delete(this.value)">Hapus</button>'
-                str += '</td>'
-                str += '</tr>'
-            }
-
-            $('#isiData').html(str)
-        }
-    })
-}
-
 function f_data_pageable() {
-    console.log("awal")
     size = $('#rowPage').val()
     order = $('#order').val()
 
@@ -50,10 +29,12 @@ function f_data_pageable() {
         pageNumber = currentPageSearch
     }else{
         pageNumber = currentPage
+        currentPageSearch = 0
     }
 
-    console.log(currentPage)
-    console.log(currentPageSearch)
+    console.log("search : " + search)
+    console.log("isSearch : " + isSearch)
+    console.log(currentPage + " - " + currentPageSearch)
 
     $.ajax({
         url: 'http://localhost:8888/api/paymentmethod/show/pageable?pageNumber=' + pageNumber + '&pageSize=' + size + '&order=' + order +'&search='+ search,
@@ -62,13 +43,13 @@ function f_data_pageable() {
         success: function (data) {
             var str = ""
             totalPage = data.totalPages - 1
-            console.log("total page : " + data.totalPages)
 
             if (data.data.length == 0) {
-                if (search) {
-                    console.log("masuk")
+                if (search && pageNumber == 0) {
                     str += '<td colspan=3>Data tidak ditemukan</td>'
                     $('.fitur').hide()
+                }else{
+                    page_previous()
                 }
             }else{
                 $('.fitur').show()
@@ -104,11 +85,6 @@ function f_data_pageable() {
                     str += '</td>'
                     str += '</tr>'
                 }
-            }
-            if (currentPage > totalPage && totalPage != 0) {
-                console.log("masuk")
-                currentPage = totalPage - 1
-                f_data_pageable()
             }
             $('#isiData').html(str)
             
@@ -182,11 +158,11 @@ function page_next() {
     f_data_pageable()
 }
 
-function page_number(page) {
+function page_number(pageNumber) {
     if (isSearch) {
-        currentPageSearch = page;
+        currentPageSearch = pageNumber;
     }else{
-        currentPage = page;
+        currentPage = pageNumber;
     }
     f_data_pageable()
 }

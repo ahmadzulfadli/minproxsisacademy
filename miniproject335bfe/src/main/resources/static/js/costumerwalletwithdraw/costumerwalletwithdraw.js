@@ -1,4 +1,5 @@
-var id = 2
+var idCustomerWallet = 1
+var customerId;
 var nominal = 0
 var walletdefaultnominalId
 var saveNominalHistoryTransaction = false
@@ -8,70 +9,104 @@ var balance = 0;
 
 
 $(function () {
-    f_all_data(id);
+    profile(idCustomerWallet);
+    f_all_data(idCustomerWallet);
 });
 
-function f_all_data(id){
+function profile(idCustomerWallet) {
+    $.ajax({
+        url: 'http://localhost:8888/api/customer/' + idCustomerWallet,
+        type: 'get',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data.mbiodata.imagePath)
+            var str = '<h4 class="card-title">' + data.mbiodata.fullname + '</h4>'
+
+            var strImg = '<img src="'+ data.mbiodata.imagePath +'" class="card-img-top rounded-circle mx-auto my-3" style="width: 200px; height: 200px; object-fit: cover;">'
+
+            $('#imgCustomer').html(strImg)
+            $('#name').html(str)
+        }
+    })
+}
+
+function f_all_data(idCustomerWallet) {
     $('#pilihan').html('')
     $('#pilihanCancel').prop("disabled", true)
     $('#pilihanSubmit').prop("disabled", true)
 
-    $.ajax({
-        url: 'http://localhost:8888/api/costumerwallet/show/'+id,
-        type: 'get',
-        contentType: 'application/json',
-        success: function (data) {
-            balance = data.data.balance
-            var str = '<p>Saldo Anda Saat Ini Rp.'+ balance +'</p>'
-            $('#saldo').html(str)
-        }
-    })
+    var nominalArray = [];
 
     $.ajax({
-        url: 'http://localhost:8888/api/walletdefaultnominal/show',
+        url: 'http://localhost:8888/api/costumerwallet/show/' + idCustomerWallet,
         type: 'get',
         contentType: 'application/json',
         success: function (data) {
-            var nominalArray = [];
-            for (var i = 0; i < data.data.length; i++) {
-                var item = data.data[i].nominal;
-                nominalArray.push(item)
-            }
+            balance = data.data.balance;
+            customerId = data.data.costumerId;
+
+            var str = '<p>Saldo Anda Saat Ini Rp.' + balance + '</p>';
+            $('#saldo').html(str);
 
             $.ajax({
-                url: 'http://localhost:8888/api/customernominal/show/'+id,
+                url: 'http://localhost:8888/api/walletdefaultnominal/show?balance=' + balance,
                 type: 'get',
                 contentType: 'application/json',
                 success: function (data) {
                     for (var i = 0; i < data.data.length; i++) {
-                        var item = data.data[i].nominal;
-                        nominalArray.push(item)
+                        var item = {
+                            id: data.data[i].id,
+                            nominal: data.data[i].nominal,
+                            keterangan: 0
+                        };
+                        nominalArray.push(item);
                     }
 
-                    nominalArray.sort(function(a, b){return a - b});
+                    $.ajax({
+                        url: 'http://localhost:8888/api/customernominal/show/' + customerId + '?balance=' + balance,
+                        type: 'get',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            for (var i = 0; i < data.data.length; i++) {
+                                var item = {
+                                    id: data.data[i].id,
+                                    nominal: data.data[i].nominal,
+                                    keterangan: 1
+                                };
+                                nominalArray.push(item);
+                            }
 
-                    var str = ''
-                    for (var i = 0; i < nominalArray.length; i++) {
-                        if (nominalArray[i] <= balance) {
-                            str += '<button class="btn btn-primary mt-2 mr-2" onclick="nominalSelected(' + id + ',' + nominalArray[i] + ')">' + nominalArray[i] + '</button>';
+                            nominalArray.sort(function (a, b) {
+                                return a.nominal - b.nominal;
+                            });
+
+                            var str = ''
+                            for (var i = 0; i < nominalArray.length; i++) {
+                                str += '<button class="btn btn-primary mt-2 mr-2" onclick="nominalSelected(' + nominalArray[i].id + ',' + nominalArray[i].nominal + ',' + nominalArray[i].keterangan + ')">' + nominalArray[i].nominal + '</button>';
+                            }
+                            str+='<button class="btn btn-primary mr-2 mt-2" onclick="f_other_nominal()">Nominal Lainnya</button>';
+
+                            $('#defaultNominal').html(str)
+
                         }
-                    }
-                    str+='<button class="btn btn-primary mr-2 mt-2" onclick="f_other_nominal()">Nominal Lainnya</button>';
-
-                    $('#defaultNominal').html(str)
+                    });
                 }
-            })
+            });
         }
-    }) 
+    });
 }
 
-function nominalSelected(id, nominalSelected){
-    walletdefaultnominalId = id
+function nominalSelected(idNominal, nominalSelected, keterangan){
+    walletdefaultnominalId = null
+    if(keterangan == 0){
+        walletdefaultnominalId = idNominal
+    }
+    console.log(walletdefaultnominalId)
     nominal = nominalSelected
     var str = '<p>Anda akan melakukan penarikan saldo sebesar Rp.'+ nominal +'</p>'
     str+='<button class="btn btn-primary btn-lg btn-block mr-2 mt-2" id="btnNext" onclick="f_password()">Lanjut</button>';
     
-    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(id)})
+    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(idCustomerWallet)})
     $('#pilihan').html(str)
 }
 
@@ -83,7 +118,7 @@ function f_other_nominal(){
     str+='</div>'
 
     $('.modal-title').html('Isi Nominal Lain')
-    $('.modal-body').html(str)
+    $('.modal-body').html(str).css('color', 'gray')
     $('#btnCancel').html('Batal')
     $('#btnSubmit').show().html('OK').off('click').on('click', selectedOtherNominal)
     $('#modal').modal('show')
@@ -107,7 +142,7 @@ function selectedOtherNominal(){
         $('#alert').append(str)
         return
     }
-    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(id)})
+    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(idCustomerWallet)})
     $('#modal').modal('hide')
     nominal = otherNominal
     saveNominalHistoryTransaction = true
@@ -127,9 +162,9 @@ function f_password(){
     str+='</div>'
 
     $('.modal-title').html('Masukkan PIN')
-    $('.modal-body').html(str)
+    $('.modal-body').html(str).css('color', 'gray')
     $('#btnCancel').hide()
-    $('#btnSubmit').show().html('OK').off('click').on('click', function(){passwordChek(id)})
+    $('#btnSubmit').show().html('OK').off('click').on('click', function(){passwordChek(idCustomerWallet)})
     $('#modal').modal('show')
     
     if (countWrongPin >= 3) {
@@ -139,10 +174,10 @@ function f_password(){
     }
 }
 
-function passwordChek(id){
+function passwordChek(idCustomerWallet){
     var pin = $('#pin').val()
     var formData = '{'
-    formData += '"id":'+id+','
+    formData += '"id":'+idCustomerWallet+','
     formData += '"pin":"'+pin+'"'
     formData += '}'
 
@@ -179,34 +214,37 @@ function enableInputs() {
 }
 
 function passwordSuccess(){
-
     $('#btnNext').prop("disabled", true)
     $('#btnSubmit').hide()
-    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(id)})
+    $('#pilihanCancel').removeAttr("disabled").off('click').on('click', function(){f_all_data(idCustomerWallet)})
     $('#pilihanSubmit').removeAttr("disabled").off('click').on('click', withdrawTransaction)
     $('#modal').modal('toggle')
 }
 
 function withdrawTransaction(){
     var formData = '{'
-    formData += '"costumerId":'+id+','
+    formData += '"costumerId":'+customerId+','
     formData += '"walletDefaultNominalId":'+walletdefaultnominalId+','
     formData += '"amount":'+nominal
     formData += '}'
 
     var formDataCustomNominal = '{'
-    formDataCustomNominal += '"customerId":'+id+','
+    formDataCustomNominal += '"customerId":'+customerId+','
     formDataCustomNominal += '"nominal":'+nominal
     formDataCustomNominal += '}'
 
     $.ajax({
-        url: 'http://localhost:8888/api/costumerwalletwithdraw/create?idCostumerWallet='+id,
+        url: 'http://localhost:8888/api/costumerwalletwithdraw/create?idCostumerWallet='+idCustomerWallet,
         type: 'post',
         contentType: 'application/json',
         data: formData,
         success: function (data) {
             if (data.status == 'failed') {
-                alert(data.message)
+                $('#alert').empty()
+                var str = '<div class="alert alert-danger" role="alert">'
+                str += 'The nominal cannot be negative or empty or zero'
+                str += '</div>'
+                $('#alert').append(str)
                 return
             }
 
@@ -224,7 +262,9 @@ function withdrawTransaction(){
                 saveNominalHistoryTransaction = false
             }
 
-            f_all_data(id)
+            f_all_data(idCustomerWallet)
+
+            $('#alert').empty()
 
             var str = '<div class="form-group">'
             str+='<label>Proses Penarikan Saldo Berhasil</label>'
@@ -232,8 +272,8 @@ function withdrawTransaction(){
             str+='<p>*OTP akan kadaluarsa setelah 1 jam</p>'
             str+='</div>'
 
-            $('.modal-title').html('Tarik Saldo').css('color', 'green')
-            $('.modal-body').html(str)
+            $('.modal-title').html('Tarik Saldo')
+            $('.modal-body').html(str).css('color', 'green')
 
             $('#btnNext').hide()
             $('#btnSubmit').hide()

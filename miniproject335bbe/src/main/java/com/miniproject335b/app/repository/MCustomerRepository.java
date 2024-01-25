@@ -1,6 +1,7 @@
 package com.miniproject335b.app.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,5 +57,5 @@ public interface MCustomerRepository extends JpaRepository<MCustomer, Long> {
 			"JOIN m_customer mc\n" + //
 			"ON mc.biodata_id = mb.id\n" + //
 			"WHERE mc.id = ?1", nativeQuery = true)
-	MUser findMUserByIdCustomer(Long idCustomer);
+	Object findMUserByIdCustomer(Long idCustomer);
 }

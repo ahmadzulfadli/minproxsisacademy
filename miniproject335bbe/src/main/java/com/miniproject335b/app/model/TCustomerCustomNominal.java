@@ -39,17 +39,17 @@ public class TCustomerCustomNominal {
     @Column(name="is_delete")
     private Boolean isDelete;
     
-    // @ManyToOne
-    // @JoinColumn(name = "created_by", insertable = false, updatable = false)
-    // private MUser mUserCreate;
+    @ManyToOne
+    @JoinColumn(name = "created_by", insertable = false, updatable = false)
+    private MUser mUserCreate;
 
-    // @ManyToOne
-    // @JoinColumn(name = "modified_by", insertable = false, updatable = false)
-    // private MUser mUserModify;
+    @ManyToOne
+    @JoinColumn(name = "modified_by", insertable = false, updatable = false)
+    private MUser mUserModify;
 
-    // @ManyToOne
-    // @JoinColumn(name = "deleted_by", insertable = false, updatable = false)
-    // private MUser mUserDelete;
+    @ManyToOne
+    @JoinColumn(name = "deleted_by", insertable = false, updatable = false)
+    private MUser mUserDelete;
 
     public Long getId() {
         return id;
@@ -131,29 +131,29 @@ public class TCustomerCustomNominal {
         this.isDelete = isDelete;
     }
 
-    // public MUser getmUserCreate() {
-    //     return mUserCreate;
-    // }
+    public MUser getmUserCreate() {
+        return mUserCreate;
+    }
 
-    // public void setmUserCreate(MUser mUserCreate) {
-    //     this.mUserCreate = mUserCreate;
-    // }
+    public void setmUserCreate(MUser mUserCreate) {
+        this.mUserCreate = mUserCreate;
+    }
 
-    // public MUser getmUserModify() {
-    //     return mUserModify;
-    // }
+    public MUser getmUserModify() {
+        return mUserModify;
+    }
 
-    // public void setmUserModify(MUser mUserModify) {
-    //     this.mUserModify = mUserModify;
-    // }
+    public void setmUserModify(MUser mUserModify) {
+        this.mUserModify = mUserModify;
+    }
 
-    // public MUser getmUserDelete() {
-    //     return mUserDelete;
-    // }
+    public MUser getmUserDelete() {
+        return mUserDelete;
+    }
 
-    // public void setmUserDelete(MUser mUserDelete) {
-    //     this.mUserDelete = mUserDelete;
-    // }
+    public void setmUserDelete(MUser mUserDelete) {
+        this.mUserDelete = mUserDelete;
+    }
 
     
 }

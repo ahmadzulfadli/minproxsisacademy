@@ -1,5 +1,5 @@
 $(function () {
-    profileDoctor(1);
+    profileDoctor(3);
 })
 function profileDoctor(id) {
     // window.location.href = "/doctordetails/" + id;
@@ -40,7 +40,7 @@ function calculateExperience(startDates, endDates) {
         
         if (i < startDates.length - 1) {
             var isBeforeDate = (dateA, dateB) => dateA < dateB;
-            console.log(isBeforeDate(new Date(start), new Date(endDates[i+1])))
+            // console.log(isBeforeDate(new Date(start), new Date(endDates[i+1])))
             if (isBeforeDate(new Date(start), new Date(endDates[i+1]))) {
                 start = endDates[i+1]
             }

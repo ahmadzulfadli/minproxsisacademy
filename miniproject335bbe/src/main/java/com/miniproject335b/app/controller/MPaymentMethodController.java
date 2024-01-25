@@ -196,7 +196,7 @@ public class MPaymentMethodController {
         // cek apakah nama dengan isDelete=false sudah ada di database
         List<MPaymentMethod> listMPaymentMethod = this.mPaymentMethodRepository.findByIsDelete(false);
         for (MPaymentMethod paymentMethod : listMPaymentMethod) {
-            if (paymentMethod.getName().equals(mPaymentMethod.getName())) {
+            if (paymentMethod.getName().toLowerCase().equals(mPaymentMethod.getName().toLowerCase())) {
                 return new ResponseEntity<>(response("failed", "Name Already Exist", new ArrayList<>()),HttpStatus.OK);
             }
         }

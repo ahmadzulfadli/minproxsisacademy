@@ -1,6 +1,5 @@
 package com.miniproject335b.app.controller;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,9 +57,9 @@ public class MWalletDefaultNominalController {
     }
     // READ-----------------------------------------------------------------------------------------
     @GetMapping("show")
-    public ResponseEntity<Map<String, Object>> getAllMWalletDefaultNominal(){
+    public ResponseEntity<Map<String, Object>> getAllMWalletDefaultNominal(@RequestParam Double balance){
         try {
-            List<MWalletDefaultNominal> mWalletDefaultNominal = this.mWalletDefaultNominalRepository.findByIsDelete(false);
+            List<MWalletDefaultNominal> mWalletDefaultNominal = this.mWalletDefaultNominalRepository.findByLimitBalance(balance);
             if (mWalletDefaultNominal.isEmpty()) {
                 return new ResponseEntity<>(response("success", "No Data", mWalletDefaultNominal), HttpStatus.OK);
             }else{

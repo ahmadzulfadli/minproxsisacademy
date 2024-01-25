@@ -142,6 +142,7 @@ public class MCourierController {
 
     @GetMapping("show/pageable")
     public ResponseEntity<Map<String, Object>> getMCourierPageable(
+            @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNumber,
             @RequestParam(defaultValue = "3") Integer pageSize,
             @RequestParam(defaultValue = "asc") String order) {
@@ -153,38 +154,13 @@ public class MCourierController {
                 pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name").descending());
             }
 
-            Page<MCourier> page = this.mCourierRepository.getMCourierPageable(pageable);
-            List<MCourier> mCourier = page.getContent();
-            if (mCourier.isEmpty()) {
-                return new ResponseEntity<>(response("failed", "Failed Fetch Data", mCourier), HttpStatus.OK);
-            } else {
-                this.pageSize = page.getSize();
-                this.currentPage = page.getNumber();
-                this.totalItems = page.getTotalElements();
-                this.totalPages = page.getTotalPages();
-
-                return new ResponseEntity<>(response("success", "Success Fetch Data", mCourier), HttpStatus.OK);
+            Page<MCourier> page;
+            if(search.equals("")){
+                page = this.mCourierRepository.getMCourierPageable(pageable);
+            }else{
+                page = this.mCourierRepository.findBySearch(pageable, search);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>(response("failed", "Failed Fetch Data", new ArrayList<>()), HttpStatus.OK);
-        }
-    }
-
-    @GetMapping("show/search")
-    public ResponseEntity<Map<String, Object>> getMCourierSearchPageable(
-            @RequestParam() String name,
-            @RequestParam(defaultValue = "0") Integer pageNumber,
-            @RequestParam(defaultValue = "3") Integer pageSize,
-            @RequestParam(defaultValue = "asc") String order) {
-
-        try {
-            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending()); 
             
-            if (order.equals("desc")) {
-                pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name").descending());
-            }
-
-            Page<MCourier> page = this.mCourierRepository.findBySearch(pageable, name);
             List<MCourier> mCourier = page.getContent();
             if (mCourier.isEmpty()) {
                 return new ResponseEntity<>(response("failed", "Failed Fetch Data", mCourier), HttpStatus.OK);

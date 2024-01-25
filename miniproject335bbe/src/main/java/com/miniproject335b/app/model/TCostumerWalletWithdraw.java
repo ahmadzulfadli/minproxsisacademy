@@ -47,22 +47,26 @@ public class TCostumerWalletWithdraw {
     private Date deletedOn;
     @Column(name="is_delete")
     private Boolean isDelete;
+
+    @ManyToOne
+    @JoinColumn(name = "costumer_id", insertable = false, updatable = false)
+    private MCustomer mCustomer;
     
-    // @ManyToOne
-    // @JoinColumn(name = "wallet_default_nominal_id", insertable = false, updatable = false)
-    // private MWalletDefaultNominal mWalletDefaultNominal;
+    @ManyToOne
+    @JoinColumn(name = "wallet_default_nominal_id", insertable = false, updatable = false)
+    private MWalletDefaultNominal mWalletDefaultNominal;
 
-    // @ManyToOne
-    // @JoinColumn(name = "created_by", insertable = false, updatable = false)
-    // private MUser mUserCreate;
+    @ManyToOne
+    @JoinColumn(name = "created_by", insertable = false, updatable = false)
+    private MUser mUserCreate;
 
-    // @ManyToOne
-    // @JoinColumn(name = "modified_by", insertable = false, updatable = false)
-    // private MUser mUserModify;
+    @ManyToOne
+    @JoinColumn(name = "modified_by", insertable = false, updatable = false)
+    private MUser mUserModify;
 
-    // @ManyToOne
-    // @JoinColumn(name = "deleted_by", insertable = false, updatable = false)
-    // private MUser mUserDelete;
+    @ManyToOne
+    @JoinColumn(name = "deleted_by", insertable = false, updatable = false)
+    private MUser mUserDelete;
 
     public Long getId() {
         return id;
@@ -184,37 +188,45 @@ public class TCostumerWalletWithdraw {
         this.isDelete = isDelete;
     }
 
-    // public MWalletDefaultNominal getmWalletDefaultNominal() {
-    //     return mWalletDefaultNominal;
-    // }
+    public MCustomer getmCustomer() {
+        return mCustomer;
+    }
 
-    // public void setmWalletDefaultNominal(MWalletDefaultNominal mWalletDefaultNominal) {
-    //     this.mWalletDefaultNominal = mWalletDefaultNominal;
-    // }
+    public void setmCustomer(MCustomer mCustomer) {
+        this.mCustomer = mCustomer;
+    }
 
-    // public MUser getmUserCreate() {
-    //     return mUserCreate;
-    // }
+    public MWalletDefaultNominal getmWalletDefaultNominal() {
+        return mWalletDefaultNominal;
+    }
 
-    // public void setmUserCreate(MUser mUserCreate) {
-    //     this.mUserCreate = mUserCreate;
-    // }
+    public void setmWalletDefaultNominal(MWalletDefaultNominal mWalletDefaultNominal) {
+        this.mWalletDefaultNominal = mWalletDefaultNominal;
+    }
 
-    // public MUser getmUserModify() {
-    //     return mUserModify;
-    // }
+    public MUser getmUserCreate() {
+        return mUserCreate;
+    }
 
-    // public void setmUserModify(MUser mUserModify) {
-    //     this.mUserModify = mUserModify;
-    // }
+    public void setmUserCreate(MUser mUserCreate) {
+        this.mUserCreate = mUserCreate;
+    }
 
-    // public MUser getmUserDelete() {
-    //     return mUserDelete;
-    // }
+    public MUser getmUserModify() {
+        return mUserModify;
+    }
 
-    // public void setmUserDelete(MUser mUserDelete) {
-    //     this.mUserDelete = mUserDelete;
-    // }
+    public void setmUserModify(MUser mUserModify) {
+        this.mUserModify = mUserModify;
+    }
+
+    public MUser getmUserDelete() {
+        return mUserDelete;
+    }
+
+    public void setmUserDelete(MUser mUserDelete) {
+        this.mUserDelete = mUserDelete;
+    }
 
     
 }

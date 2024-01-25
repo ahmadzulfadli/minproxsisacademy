@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.miniproject335b.app.model.MUser;
 import com.miniproject335b.app.model.TCostumerWallet;
 import com.miniproject335b.app.model.TCostumerWalletWithdraw;
 import com.miniproject335b.app.model.TToken;
 import com.miniproject335b.app.repository.MCustomerRepository;
-import com.miniproject335b.app.repository.MUserRepository;
 import com.miniproject335b.app.repository.TCostumerWalletRepository;
 import com.miniproject335b.app.repository.TCostumerWalletWithdrawRepository;
 import com.miniproject335b.app.repository.TTokenRepository;
@@ -46,7 +43,7 @@ public class TCostumerWalletWithdrawController {
 
     @Autowired
 	private MCustomerRepository mCustomerRepository;
-    
+
     // lessBalance-----------------------------------------------------------------------------------------------------------
     private void lessBalance(Long id, Double amount) {
         TCostumerWallet tCostumerWallet = this.tCostumerWalletRepository.findById(id).orElse(null);
@@ -76,54 +73,35 @@ public class TCostumerWalletWithdrawController {
     }
 
     // Save OTP To Token Table--------------------------------------------------------------------------------------------------------
-    private ResponseEntity<Map<String, Object>> saveOtp(Long id, Integer otp) {
+    private String saveOtp(Long id, Integer otp) {
         try {
-            MUser users = this.mCustomerRepository.findMUserByIdCustomer(id);
+            Object users = this.mCustomerRepository.findMUserByIdCustomer(id);
+    
+            Long idUser = (Long) ((Object[]) users)[0];
+            String email = (String) ((Object[]) users)[6];
+
+            // System.out.println("id : "+idUser);
+            // System.out.println("email : "+email);
+
             TToken token = new TToken();
-            token.setCreatedBy(users.getId());
+            token.setCreatedBy(idUser);
             token.setCreatedOn(new Date());
-            token.setEmail(users.getEmail());
+            token.setEmail(email);
             token.setIsDelete(false);
             token.setIsExpired(false);
             token.setUsedFor("wallet withdraw");
-            token.setUserId(users.getId());
+            token.setUserId(idUser);
             token.setExpiredOn(new Date(System.currentTimeMillis() + 3600000));
             token.setToken(otp.toString());
 
             TToken tokenSaved = this.tTokenRepository.save(token);
             if (tokenSaved.equals(token)) {
-                return new ResponseEntity<>(response("success", "Saved Success", tokenSaved), HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<>(response("failed", "Saved Failed", tokenSaved), HttpStatus.OK);
+                return "Saved OTP Failed";
             }
+            return "Saved OTP Success";
         } catch (Exception e) {
-            return new ResponseEntity<>(response("failed", "Saved Failed", new ArrayList<>()), HttpStatus.OK);
-        }
-    }
-
-    @PostMapping("token/create")
-    public ResponseEntity<Map<String, Object>> saveOtpApi(@RequestParam Long id,@RequestParam Integer otp) {
-        try {
-            MUser users = this.mCustomerRepository.findMUserByIdCustomer(id);
-            TToken token = new TToken();
-            token.setCreatedBy(users.getId());
-            token.setCreatedOn(new Date());
-            token.setEmail(users.getEmail());
-            token.setIsDelete(false);
-            token.setIsExpired(false);
-            token.setUsedFor("wallet withdraw");
-            token.setUserId(users.getId());
-            token.setExpiredOn(new Date(System.currentTimeMillis() + 3600000));
-            token.setToken(otp.toString());
-
-            TToken tokenSaved = this.tTokenRepository.save(token);
-            if (tokenSaved.equals(token)) {
-                return new ResponseEntity<>(response("success", "Saved Success", tokenSaved), HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(response("failed", "Saved Failed", tokenSaved), HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(response("failed", "Saved Failed", new ArrayList<>()), HttpStatus.OK);
+            return "Saved OTP Failed";
         }
     }
     
@@ -153,7 +131,9 @@ public class TCostumerWalletWithdrawController {
             tCostumerWalletWithdraw.setIsDelete(false);
             TCostumerWalletWithdraw tCostumerWalletSaved = this.tCostumerWalletWithdrawRepository.save(tCostumerWalletWithdraw);
             if (tCostumerWalletWithdraw.equals(tCostumerWalletSaved)) {
-                saveOtp(idCostumerWallet, otp);
+                String statusOtp = saveOtp(tCostumerWalletSaved.getCostumerId(), otp);
+                System.out.println("statusOtp : "+statusOtp);
+                
                 lessBalance(idCostumerWallet, tCostumerWalletSaved.getAmount().doubleValue());
                 return new ResponseEntity<>(response("success", "Saved Success", tCostumerWalletSaved), HttpStatus.CREATED);
             } else {

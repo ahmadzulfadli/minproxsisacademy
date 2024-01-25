@@ -10,7 +10,10 @@ import com.miniproject335b.app.model.TCustomerCustomNominal;
 
 @Repository
 public interface TCustomerCustomNominalRepository extends JpaRepository<TCustomerCustomNominal, Long>{
-    
+
     @Query(value = "SELECT * FROM t_customer_custom_nominal WHERE is_delete = false AND customer_id = ?1", nativeQuery = true)
     List<TCustomerCustomNominal> findByCostumerId(Long customerId);
+    
+    @Query(value = "SELECT * FROM t_customer_custom_nominal WHERE is_delete = false AND customer_id = ?1 AND nominal <= ?2", nativeQuery = true)
+    List<TCustomerCustomNominal> findByCostumerId(Long customerId, Double balance);
 }
